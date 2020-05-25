@@ -1,0 +1,11 @@
+Order of execution in mysql
+
+1. From
+2. Where
+3. Group by 
+4. having
+5. select
+6. order by
+7. limit
+
+partition by comes in the same stage as select 

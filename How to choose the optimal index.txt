@@ -1,0 +1,49 @@
+How to choose the optimal index
+
+Table can have many indexes but SQL will use only one index per query.
+
+1. Order of index matter
+2. Start from where clause and join clause and add this columns to index.
+3. then we can go to range  where columns are used. SQL can only handle one column from range so add the most effective ones.
+4. In cases where there is no range , then we can add column from group by,order by assuming there is only one direction.
+
+In some cases it makes sense to create other index on order by .Please note though that for this to happen, the index should contain all columns from the ORDER BY clause and they should all be specified with the same orderIt will only happen when MySQL knows that going through the sorting index will be more efficient to quickly track the result, when compared to working with other indexes (or scanning the full table).
+
+
+Also, in some cases, it makes sense to also add the columns from the SELECT clause to the index, to create covering index. This is only relevant if the index isn't already 'too large'. What's too large? Well, no official rule of thumb here, but I usually go with up to 5 columns in an index. Creating a covering index allows the database to not only filter using the index, but to also fetch the information required by the SELECT clause directly from the index, which saves precious I/O operations for fetching the data of the filtered rows from the table's data.
+
+---------------------
+
+SELECT
+    id, first_name, last_name, age
+FROM
+    employees
+WHERE
+    first_name = 'John'
+        AND last_name = 'Brack'
+        AND age > 25
+ORDER BY age ASC;
+
+For this query, we'll start with adding the columns first_name and last_name, which are compared with an equality operator. Then, we'll add the age column which is compared with a range condition. No need to have the ORDER BY clause indexed here, as the age column is already in the index. Last but not least, we'll add id from the SELECT clause to the index to have a covering index.
+
+So to index this query properly, you should create the index:
+employees (first_name, last_name, age, id).
+
+--------------------------
+The OR operator in filtering conditions
+Consider this query:
+
+SELECT
+    a, b
+FROM
+    tbl
+WHERE
+    a = 3 OR b = 8;
+In many cases, MySQL won't be able to use an index to apply an OR condition, and as a result, this query is not index-able.
+
+Therefore, we recommend to avoid such OR conditions and consider splitting the query to two parts, combined with a UNION DISTINCT (or even better, UNION ALL, in case you know there won't be any duplicate results)
+
+
+-----------------------
+
+

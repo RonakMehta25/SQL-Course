@@ -1,0 +1,19 @@
+The order of columns in an index is important
+
+Let's say I hand you my contacts phone book which is ordered by the contact's first name and ask you to count how many people are there named "John" in the book. You'll grab the book in both hands and say "no problem". You will navigate to the page that holds all names starting with John, and start counting from there.
+
+Now, let's say I change the assignment and hand you a phone book that is ordered by the contact's last name, but ask you to still count all contacts with the first name "John". How would you approach that? Well, the database scratches his head in this situation as well.
+
+Now lets look at an SQL query to demonstrate the same behavior with the MySQL optimizer:
+
+SELECT
+    first_name, last_name
+FROM
+    contacts
+WHERE
+    first_name = 'John';
+Having the index contacts (first_name, last_name) is ideal here, because the index starts with our filtering condition and ends with another column in the SELECT clause.
+
+But, having the reverse index contacts (last_name, first_name) is rather useless, as the database can't use the index for filtering, as the column we need is second in the index and not first.
+
+The conclusion from this example is that the order of columns in an index is rather important.

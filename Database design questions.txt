@@ -1,0 +1,13 @@
+Database design questions
+
+https://leetcode.com/discuss/interview-question/system-design/295671/Database-Design/280335
+
+https://leetcode.com/discuss/general-discussion/318868/database-interview-question
+
+https://www.sqlite.org/whentouse.html
+
+https://leetcode.com/discuss/interview-question/208888/Design-a-system-to-keep-track-of-changes-in-an-SQL-database/253246
+
+Write Ahead logs (WAL)
+
+https://www.udemy.com/course/database-design/learn/lecture/1490774#overview

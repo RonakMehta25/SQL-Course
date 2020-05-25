@@ -1,0 +1,33 @@
+Stored Procedure
+
+Stored Procedure is a group of T-SQL statements. If you have a query which is repeating over and over again then you can store it as a stored procedure and call it just by it's name.
+
+SQL is a query language to operate on sets.
+
+It is more or less standardized, and used by almost all relational database management systems: SQL Server, Oracle, MySQL, PostgreSQL, DB2, Informix, etc.
+
+PL/SQL is a proprietary procedural language used by Oracle
+
+PL/pgSQL is a procedural language used by PostgreSQL
+
+TSQL is a proprietary procedural language used by Microsoft in SQL Server.
+
+Procedural languages are designed to extend SQL's abilities while being able to integrate well with SQL. Several features such as local variables and string/data processing are added. These features make the language Turing-complete.
+
+They are also used to write stored procedures: pieces of code residing on the server to manage complex business rules that are hard or impossible to manage with pure set-based operations.
+
+Eg
+
+CREATE PROCEDURE spGetEmployees
+@Gender varchar(5),
+@DepartmentId int
+As
+Begin
+	select name,gender,salary from employees where gender=@Gender and departmentId=@DepartmentId
+End
+
+spGetEmployees "Male",2
+
+TO execute the stored procedure.
+1. We can directly call the name spGetEmployees
+2. execute spGetEmployees

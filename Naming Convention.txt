@@ -1,0 +1,5 @@
+Naming Convention
+
+For tables and attributes,use lowercase and replace space with underscore
+
+SQL should be in capital letters

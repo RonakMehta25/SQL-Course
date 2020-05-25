@@ -1,0 +1,6 @@
+SQL vs NoSQL
+
+Advantages of NoSQL over SQL
+1. Ability to scale horizontally
+2. No fixed structure
+3. 

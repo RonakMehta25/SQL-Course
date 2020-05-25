@@ -1,0 +1,23 @@
+Avoid wrapping indexed columns with functions
+
+Consider this query, which counts the number of hot dogs purchased in the US on 2018. Just in case you're curious, 18,000,000,000 hot dogs were sold in the US in 2018.
+
+SELECT
+    COUNT(*)
+FROM
+    us_hotdog_purchases
+WHERE
+    YEAR(purchase_time) = ‘2018’
+As you can see, we are using the YEAR function to grab the year part from the purchase_time column. This function call will prevent the database from being able to use an index for the purchase_time column search, because we indexed the value of purchase_time, but not the return value of YEAR(purchase_time).
+
+To overcome this challenge and tune this SQL query, you can index the function's result, by using  Generated Columns, which are available starting MySQL 5.7.5.
+
+Another solution can be to find an alternative way to write the same query, without using the function call. In this example, we can transform that condition to a 2-way range condition, which will return the same results:
+
+SELECT
+    COUNT(*)
+FROM
+    us_hotdog_purchases
+WHERE
+    purchased_at >= '2018-01-01'
+        AND purchased_at < '2019-01-01'

@@ -1,0 +1,3 @@
+Query Optimization 2
+
+Using index on where clause attribute can help to speed the query really fast.

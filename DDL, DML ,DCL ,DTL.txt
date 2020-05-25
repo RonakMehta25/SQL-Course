@@ -1,0 +1,17 @@
+DDL, DML ,DCL ,DTL
+
+DDL Data Definition Language
+Eg. Create , drop , rename, comment ,alter, truncate
+
+DML Data Manipulation Language
+Eg.select ,insert , update , delete, Merge ,call, explain plan, lock table
+
+DCL Data Control Language
+Eg. Grant , Revoke.
+
+TCL  Transaction Control Language
+Eg. Rollback
+commit 
+savepoint
+set transaction 
+

@@ -1,0 +1,18 @@
+Avoid sorting with a mixed order
+
+Consider this query, which selects all posts from Facebook and sorts them by the username in an ascending order, and then by the post date in a descending order.
+
+
+SELECT
+    username, post_type
+FROM
+    fb_posts
+ORDER BY username ASC , post_type DESC
+
+MySQL (and so many other relational databases), cannot use indexes when sorting with a mixed order (both ASC and DESC in the same ORDER BY clause). This changed with the release of the reversed indexes functionality and MySQL 8.x.
+
+So what can you do if you didn't upgrade to the latest MySQL version just yet? First, we'd recommend to re-consider the mixed order sort. Do you really need it? If not, avoid it.
+
+So you decided you need it, or your product manager said: "No way we can manage without it"? Another option will be to use Generated columns (available on MySQL 5.7.5+) to create a reversed column and sort on that column instead of the original. As an example, assume you're sorting on a numeric column, you can create a generated column with the negative numeric value that correlates to the original number and sort on that new column in the opposite order. That way, all columns will have the same sort order in the ORDER BY clause, but the sort will happen as originally defined by your product's requirement.
+
+The last potential solution won't always be an option, so your last resort will be upgrading to the latest MySQL version which supports mixed order sorting using indexes.

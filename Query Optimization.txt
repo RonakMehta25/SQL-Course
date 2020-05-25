@@ -1,0 +1,13 @@
+Query Optimization
+
+type - defines how the tables are accessed / joined. The most popular access types you'll generally see are the following, sorted from the worst to the best: ALL, index, range, ref, eq_ref, const, system. As you can see in the EXPLAIN, the table votes is the first table accessed, using the ALL access_type, which means MySQL will scan the entire table, using no indexes, so it will go through over 14 million records. The posts table is then accessed using the eq_ref access type. Other than the system and const types, eq_ref is the best possible join type. The database will access one row from this table for each combination of rows from the previous tables.
+
+rows - Indicates the amount of number of rows MySQL believes it must examine from this table, to execute the query. This is only an estimation. Usually, high row counts mean there is room for query optimization.
+
+filtered - The amount of rows unfiltered by the conditions in the WHERE clause. These rows will be joined to the table in the next row of the EXPLAIN plan. As mentioned previously, this is a guesstimate as well, so MySQL can be wrong with this estimation.
+
+
+extra - Contains more information about the query processing. Let's look into the extras for our query:
+using where - The WHERE clause is used to restrict which rows are fetched from the current table (votes) and matched with the next table (posts).
+using temporary - As part of the query processing, MySQL has to create a temporary table, which in many cases can result in a performance penalty. In most cases, it will indicate that one of the ORDER BY or GROUP BY clauses is executed without using an index. It can also happen if the GROUP BY and ORDER BY clauses include different columns (or in different order).
+using filesort - MySQL is forced to perform another pass on the results of the query to sort them. In many cases, this can also result in a performance penalty.

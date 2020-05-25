@@ -1,0 +1,41 @@
+Constraints in SQL
+
+Surrogate Key 
+Personid int NOT NULL AUTO_INCREMENT,
+
+
+NOT NULL - Ensures that a column cannot have a NULL value
+
+LastName varchar(255) NOT NULL
+
+UNIQUE - Ensures that all values in a column are different
+
+ID int NOT NULL UNIQUE,
+
+PRIMARY KEY - A combination of a NOT NULL and UNIQUE. Uniquely identifies each row in a table
+
+PRIMARY KEY (ID)
+CONSTRAINT PK_Person PRIMARY KEY (ID,LastName)
+
+FOREIGN KEY - Uniquely identifies a row/record in another table
+FOREIGN KEY (PersonID) REFERENCES Persons(PersonID)
+CONSTRAINT fk_mrt_ot FOREIGN KEY (refcol1, refcol2)
+                        REFERENCES OtherTable(col1, col2)
+
+CHECK - Ensures that all values in a column satisfies a specific condition
+CHECK (Age>=18)
+CONSTRAINT CHK_Person CHECK (Age>=18 AND City='Sandnes')
+
+
+DEFAULT - Sets a default value for a column when no value is specified
+City varchar(255) DEFAULT 'Sandnes'
+OrderDate date DEFAULT GETDATE()
+
+
+INDEX - Used to create and retrieve data from the database very quickly
+
+CREATE INDEX idx_pname
+ON Persons (LastName, FirstName);
+
+CREATE UNIQUE INDEX index_name
+ON table_name (column1, column2, ...);

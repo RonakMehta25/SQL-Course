@@ -1,0 +1,15 @@
+Avoid LIKE searches with prefix wildcards
+
+Consider this query, which searches all Facebook posts from a username which includes the string 'Mar', so we are searching for all posts written by users named Mark, Marcus, Almar, etc.
+
+SELECT
+    *
+FROM
+    fb_posts
+WHERE
+    username LIKE '%Mar%'
+Having a wildcard '%' at the beginning of the pattern will prevent the database from using an index for this column's search. Such searches can take a while..
+
+In this case, there are two options to improve this query's performance. The first one is trivial - consider whether the prefix wildcard is important enough. If you can manage without it, get rid of it.
+
+Another option will be to use full-text indexes. Please note though, that these indexes and the MATCH ... AGAINST syntax aren't free from challenges and have some differences when compared to the familiar LIKE expressions in MySQL.

@@ -1,0 +1,19 @@
+Primary Key vs Surrogate Key
+
+Any column or a combination of columns that can uniquely identify a record is a candidate key. For example, your customer table may have a customer_id, which is populated by a database sequence, and a customer_number, which is used by the end user to unquely identify a customer. Both customer_id and customer_number are candidate keys.
+
+Among the candidate keys, you choose one as the primary key of a table. For example, you can choose customer_id as the primary key of your table.
+
+If what you choose is not a nature key, but a system generated identifier, it is called surrogate key. Or we can say that you use a surrogate key" as the primary key. In the avove example, the customer_id is a surrogate key and the customer_number is the nature key.
+
+Eg  auto_increment column in MySQL, or a sequence in Oracle, or an identity column in SQL Server.
+
+1. Both keys contains unique value for each column. Thus both are candidate key.
+2. Primary Key are used in OLTP while surrogate key is used in OLAP.
+3. Primary Key has business meaning while surrogate key does not have any business meaning.
+
+The advantage of using surrogate key in Data warehouse are as follows:-
+
+1. Surrogate keys are simple numeric values, as simple as normal counting. So most of the time they save storage space.
+2. As surrogate keys are simple and short, it speed-up the join performance.
+3. Best thing is that same pattern of surrogate keys can be used across all the tables present in a star/schema.

@@ -1,0 +1,39 @@
+INFORMATION_SCHEMA
+
+INFORMATION_SCHEMA provides access to database metadata, information about the MySQL server such as the name of a database or table, the data type of a column, or access privileges.
+
+
+Find Long Running Queries
+In version 5.1, MySQL added the pocesslist to the INFORMATION_SCHEMA database. It shows information on all the currently running processes:
+
+Show processlist;
+
++----+----------+----------------+------+---------+------+-------+-------------------+
+| Id | User     |Host            | db   | Command | Time | State | Info              |
++----+----------+----------------+------+---------+------+-------+-------------------+
+| 1  | root     | localhost:1715 |      | Sleep   | 73   |       |                   |
+| 2  | root     | localhost:1716 | test | Query   | 0    |       | show processlist  |
+| 5  | sonar    | localhost:1835 | test | Sleep   | 2359 |       |                   |
++----+----------+----------------+------+---------+------+-------+-------------------+
+We can query the processlist to find long running queries.  The Time field is in seconds, so we can fetch all the queries that are running for over10 minutes by comparing it to the expression of sixty seconds times ten:
+
+SELECT * FROM information_schema.processlist 
+WHERE COMMAND = 'Query'  
+AND   time    > 60 * 10;
+
+Display Access Privileges
+
+SELECT grantee, 
+       privilege_type, 
+       is_grantable
+FROM   information_schema.schema_privileges
+WHERE  table_schema = 'sonar';
+
+Display Tables with More Than a Given Number of Rows
+
+SELECT CONCAT(table_schema,'.',table_name) as table_name,
+       table_rows
+FROM   information_schema.tables 
+ WHERE table_rows > 1000
+ AND table_schema not in('information_schema','mysql','performance_schema');
+ORDER BY table_rows desc;

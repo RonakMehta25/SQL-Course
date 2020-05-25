@@ -1,0 +1,25 @@
+LEAD() and LAG() Function
+
+The LEAD() and LAG() function in MySQL are used to get preceding and succeeding value of any row within its partition. These functions are termed as nonaggregate Window functions.
+
+https://www.mysqltutorial.org/mysql-window-functions/mysql-lag-function/
+
+SELECT
+    productline, 
+    order_year, 
+    order_value,
+    LAG(order_value, 1) OVER (
+        PARTITION BY productLine
+        ORDER BY order_year
+    ) prev_year_order_value
+FROM 
+    productline_sales;
+	
+In the above example , you will get order_value from previous year in current year
+
+
+Answer for consecutive same numbers
+
+set @rw=1;
+select num from (select id,num,case when lg!=num then @rw:=@rw+1 else @rw end as rn from (select id,num, lag(num) over(order by id) as lg from consect) tmp1) tmp2 group by rn having count(*)>=3;
+

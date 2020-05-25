@@ -1,0 +1,3 @@
+SQL Basic Questions 
+
+update employee set salary=1.5*salary;

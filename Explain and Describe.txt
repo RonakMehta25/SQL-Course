@@ -1,0 +1,25 @@
+Explain and Describe
+
+The DESCRIBE and EXPLAIN statements are synonyms. 
+In practice, the DESCRIBE keyword is more often used to obtain information about table structure, whereas EXPLAIN is used to obtain a query execution plan (that is, an explanation of how MySQL would execute a query).
+
+mysql> DESCRIBE City;
++------------+----------+------+-----+---------+----------------+
+| Field      | Type     | Null | Key | Default | Extra          |
++------------+----------+------+-----+---------+----------------+
+| Id         | int(11)  | NO   | PRI | NULL    | auto_increment |
+| Name       | char(35) | NO   |     |         |                |
+| Country    | char(3)  | NO   | UNI |         |                |
+| District   | char(20) | YES  | MUL |         |                |
+| Population | int(11)  | NO   |     | 0       |                |
++------------+----------+------+-----+---------+----------------+
+
+
+EXPLAIN works with SELECT, DELETE, INSERT, REPLACE, and UPDATE statements. In MySQL 8.0.19 and later, it also works with TABLE statements.
+
+Explain analize helps to get teh following
+
+Actual time to get first row (in milliseconds)
+Actual time to get all rows (in milliseconds)
+Actual number of rows read
+Actual number of loops

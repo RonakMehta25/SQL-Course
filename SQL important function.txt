@@ -1,0 +1,39 @@
+SQL important function
+
+SELECT REPLACE("SQL Tutorial", "SQL", "HTML");
+
+SELECT CONCAT("SQL ", "Tutorial ", "is ", "fun!") AS ConcatenatedString;
+
+SELECT CHARACTER_LENGTH("SQL Tutorial") AS LengthOfString;
+
+SELECT CONCAT_WS("-", "SQL", "Tutorial", "is", "fun!") AS ConcatenatedString;
+
+SELECT ROUND(135.375, 2);
+
+SELECT ABS(-243.5);
+
+SELECT CEIL(25.75);
+
+SELECT POW(4, 2);
+
+SELECT SQRT(64);
+
+SELECT UPPER("SQL Tutorial is FUN!");
+
+SELECT TRIM('    SQL Tutorial    ') AS TrimmedString;
+
+SELECT SUBSTRING("SQL Tutorial", 5, 3) AS ExtractString;
+
+SELECT SUBSTRING_INDEX("www.w3schools.com", ".", 1);
+
+SELECT CAST("2017-08-29" AS DATE);
+
+DATE	Converts value to DATE. Format: "YYYY-MM-DD"
+DATETIME	Converts value to DATETIME. Format: "YYYY-MM-DD HH:MM:SS"
+TIME	Converts value to TIME. Format: "HH:MM:SS"
+CHAR	Converts value to CHAR (a fixed length string)
+SIGNED	Converts value to SIGNED (a signed 64-bit integer)
+UNSIGNED	Converts value to UNSIGNED (an unsigned 64-bit integer)
+BINARY	Converts value to BINARY (a binary string)
+
+SELECT IF(500<1000, "YES", "NO");

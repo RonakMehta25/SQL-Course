@@ -1,0 +1,27 @@
+MySQL Triggers
+
+
+The MySQL trigger is a database object that is associated with a table. 
+
+It will be activated when a defined action is executed for the table. 
+
+The trigger can be executed when you run one of the following MySQL statements on the table: INSERT, UPDATE and DELETE and it can be invoked before or after the event.
+
+
+
+The main requirement for running such MySQL Triggers is having MySQL SUPERUSER privileges.
+
+CREATE TRIGGER agecheck BEFORE INSERT ON people FOR EACH ROW IF NEW.age < 0 THEN SET NEW.age = 0; END IF;
+
+The SQL standard defines two types of triggers: row-level triggers and statement-level triggers.
+
+A row-level trigger is activated for each row that is inserted, updated, or deleted.  For example, if a table has 100 rows inserted, updated, or deleted, the trigger is automatically invoked 100 times for the 100 rows affected.
+
+
+A statement-level trigger is executed once for each transaction regardless of how many rows are inserted, updated, or deleted.
+
+MySQL supports only row-level triggers. It doesn’t support statement-level triggers.
+
+Advantages: Check data integrity,Errors,Run scheduled Task and audit changes.
+
+Disadvantages : Adds additional overhead and 

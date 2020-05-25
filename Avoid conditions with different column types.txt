@@ -1,0 +1,17 @@
+Avoid conditions with different column types
+
+Consider this query, which selects the number of red fruits in a forest.
+
+
+SELECT
+    COUNT(*)
+FROM
+    forest
+WHERE
+    fruit_color = 5;   /* 5 = red */
+	
+Assuming the column fruit_color's type is VARCHAR, or just anything non-numeric, indexing that column won't be very helpful, as the required implicit cast will prevent the database from using the index for the filtering process.
+
+So how can you tune this SQL query? You have two options to optimize this query. The first one would be to compare the column to a constant value that matches the column's type, so if it's a VARCHAR column, compare it to '5' (with single quotes) and not to 5 (which is a numeric comparison which will result in an implicit cast).
+
+A better option will be to adjust the column's type to match the most suitable type for the values the column holds. In this example, the column should be altered to an INT type. Please note that altering a column's type can be a complicated task, so read about the challenges of that task before heading towards it.

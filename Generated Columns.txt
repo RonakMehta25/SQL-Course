@@ -1,0 +1,29 @@
+Generated Columns
+
+They can be used during CREATE TABLE or ALTER TABLE statements. 
+
+It is a way of storing data without actually sending it through the INSERT or UPDATE clauses in SQL. The database resolves what the data will be.
+
+
+There are two types of Generated Columns: Virtual and Stored. They work with:
+
+mathematical expressions (product_price * quantity)
+built-in functions (RIGHT(), CONCAT(), FROM_UNIXTIME(), JSON_EXTRACT())
+literals (“2”, “new”, 0)
+
+Besides that, they can be indexed but they don’t allow subqueries in it.
+
+Virtual Columns
+
+They take no disk space, except when using a Virtual Column as in a Secondary Index.
+They are an INPLACE operation: it means the table definition is changed without having to recopy all the data again. More info.
+The values are calculated on the fly during read operations and BEFORE triggers.
+Consider using virtual columns for data where changes happens in a significant number of times. The cost of a Virtual Column comes from reading a table constantly and the server has to compute every time what that column value will be.
+
+Stored Columns
+They do use disk space.
+It has the same cost of adding a new column, so it is a COPY operation
+Values are updated in every INSERT and UPDATE statement.
+You should consider using Stored Columns for when the data doesn’t change significantly or at all after creation, like for instance, the example above with the orders_items table. Once a purchase is made, the price of the product is stored, not being changed, neither the quantity. Considering this information we could create total_item_price as a Stored Column.
+
+For defining stored columns in the create table, we have to use the keyword stored as nothing specified will indicate virtual column

@@ -1,0 +1,5 @@
+SQL - Leetcode
+
+1. Convert records in rows into columns
+
+2. how to compare current record in table with any previous record

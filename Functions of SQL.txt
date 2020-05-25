@@ -1,0 +1,6 @@
+Functions of SQL
+
+1. Coalesce
+2. IS_NULL()
+3. Union and Union_ALL(Union just removes the entire duplicate column and sort it). Order by should be after last select statement
+4. Join and Union (Union combines rows from multiple select statement and Join combines column from different table)
